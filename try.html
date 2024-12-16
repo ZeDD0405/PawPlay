@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+</head>
+<body>
+  <form>
+    <input id="name" placeholder="Name"><br>
+    <input id="age" type="number" placeholder="Age"><br>
+    <input id="email" placeholder="Email"><br>
+    <input id="password" type="password" placeholder="Password"><br>
+    <input id="confirmPassword" type="password" placeholder="Confirm Password"><br>
+    <button type="button" onclick="validate()">Submit</button>
+  </form>
+
+  <script>
+    function validate() {
+      const name = document.getElementById("name");
+      const age = document.getElementById("age");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const confirmPassword = document.getElementById("confirmPassword");
+
+      if (!/^[A-Za-z]+$/.test(name.value)) return alert("Invalid Name");
+      if (age.value < 0 || age.value > 100) return alert("Invalid Age");
+      if (!email.value.includes("@")) return alert("Invalid Email");
+      if (!(password.value.match(/[A-Z]/) && password.value.match(/\d/) && password.value.match(/[@$!%*?&]/) && password.value.length >= 8)) 
+        return alert("Invalid Password");
+
+      if (password.value !== confirmPassword.value) return alert("Passwords do not match");
+      
+      alert("Valid Form");
+    }
+  </script>
+</body>
+</html>

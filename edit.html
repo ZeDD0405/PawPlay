@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create or update your profile on PawPal Connect. Manage your wishlist and receipts.">
+    <meta name="keywords" content="profile creation, user profile, wishlist, receipts">
+    <title>Create Profile - PawPal Connect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4caf50; /* Green */
+            --secondary-color: #388e3c; /* Darker green */
+            --text-color-light: #f4f7f9;
+            --text-color-dark: #333;
+            --background-color: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color-dark);
+            background: #f4f7f9;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 0.25rem 0.5rem var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 75rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #e0e0e0;
+        }
+
+        .hero-profile {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('profile-bg.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 6rem 1.5rem;
+            background-size: cover;
+            background-attachment: fixed;
+            margin-top: 4rem;
+        }
+
+        .hero-profile h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .profile-content {
+            padding: 2rem;
+            max-width: 75rem;
+            margin: 0 auto;
+            background: var(--background-color);
+            border-radius: 0.75rem;
+            box-shadow: 0 0.5rem 1rem var(--shadow-color);
+        }
+
+        .profile-info, .profile-form, .wishlist-form, .receipt-upload {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.25rem 0.5rem var(--shadow-color);
+        }
+
+        .profile-info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--primary-color);
+            display: block;
+            margin: 0 auto 1rem;
+        }
+
+        .profile-info h2 {
+            font-size: 2rem;
+            margin: 0.5rem 0;
+            font-weight: 500;
+        }
+
+        .profile-info p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .profile-form input,
+        .profile-form textarea,
+        .profile-form button,
+        .wishlist-form input,
+        .wishlist-form button,
+        .receipt-upload input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+
+        .profile-form textarea,
+        .wishlist-form textarea {
+            resize: vertical;
+        }
+
+        .profile-form button,
+        .wishlist-form button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .profile-form button:hover,
+        .wishlist-form button:hover {
+            background: var(--secondary-color);
+        }
+
+        .upload-btn {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .upload-btn input[type="file"] {
+            display: none;
+        }
+
+        .upload-btn label {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .upload-btn label:hover {
+            background: var(--secondary-color);
+        }
+
+        .wishlist-form ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wishlist-form ul li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .wishlist-form ul li span {
+            display: block;
+            flex: 1;
+        }
+
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            box-shadow: 0 -0.25rem 0.5rem var(--shadow-color);
+        }
+
+        @media (max-width: 48rem) {
+            .profile-info img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .hero-profile h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <h1>PawPal Connect</h1>
+            <ul>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-profile">
+        <div class="container">
+            <h1>Create or Update Your Profile</h1>
+        </div>
+    </section>
+
+    <section class="profile-content">
+        <div class="profile-info">
+            <form id="profileForm">
+                <div class="upload-btn">
+                    <input type="file" id="profilePicture" accept="image/*">
+                    <label for="profilePicture">Upload Profile Picture</label>
+                </div>
+                <img id="profileImg" src="default-profile.jpg" alt="Profile Picture">
+                <h2>John Doe</h2>
+                <p>John Doe is a dedicated community member who has made significant contributions to the welfare of street animals. With numerous successful campaigns and a passion for animal rights, John is a true hero in our community.</p>
+            </form>
+        </div>
+
+        <div class="profile-form">
+            <h2>Update Profile Information</h2>
+            <form id="updateProfileForm">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" value="John Doe" required>
+
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..." required>John Doe is a dedicated community member...</textarea>
+
+                <label for="achievement">Achievements:</label>
+                <textarea id="achievement" name="achievement" rows="4" placeholder="List your achievements...">Raised ₹50,000 for street dogs...</textarea>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+
+        <div class="wishlist-form">
+            <h2>Your Wishlist</h2>
+            <form id="wishlistForm">
+                <label for="wishlistItem">Add New Wishlist Item:</label>
+                <input type="text" id="wishlistItem" name="wishlistItem" placeholder="Enter an item you wish for" required>
+
+                <label for="itemLink">Item Link URL:</label>
+                <input type="url" id="itemLink" name="itemLink" placeholder="Enter the item link" required>
+
+                <button type="submit">Add to Wishlist</button>
+
+                <ul id="wishlistItems">
+                    <!-- Wishlist items will be dynamically added here -->
+                </ul>
+            </form>
+        </div>
+
+        <div class="receipt-upload">
+            <h2>Upload Receipts</h2>
+            <form id="receiptForm">
+                <div class="upload-btn">
+                    <input type="file" id="receiptFiles" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    <label for="receiptFiles">Upload Receipts</label>
+                </div>
+                <p>Accepted formats: PDF, JPG, JPEG, PNG. You can upload multiple files at once.</p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 PawPal Connect. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle the wishlist addition and receipt uploads
+        document.getElementById('wishlistForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const wishlistItem = document.getElementById('wishlistItem').value;
+            const itemLink = document.getElementById('itemLink').value;
+            if (wishlistItem && itemLink) {
+                const ul = document.getElementById('wishlistItems');
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${wishlistItem} - <a href="${itemLink}" target="_blank">${itemLink}</a></span>`;
+                ul.appendChild(li);
+                document.getElementById('wishlistItem').value = '';
+                document.getElementById('itemLink').value = '';
+            }
+        });
+
+        // Add your JavaScript code for handling file uploads and other dynamic features
+    </script>
+</body>
+</html>
